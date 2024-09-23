@@ -13,28 +13,26 @@ from src.facial_key_point.utils.inference_help import FacialKeyPointDetection
   
 
 if __name__=='__main__':
+  #load and convert image
   image=Image.open('face.jpg').convert('RGB')
+
+  plt.figure(figsize=(10, 5))
+  #plot original image
+  plt.subplot(121)
+  plt.title('Original Image')
+  plt.imshow(image)
+
+  #perform facial key point detection
   facial_key_point_detection = FacialKeyPointDetection()
   image, kp = facial_key_point_detection.predict(image)
-  print(image)
+  # print(image)
 
-  plt.figure()
+  #plot image with facial key point
+  plt.subplot(122)
+  plt.title("Image with Facial Keypoints")
+  # plt.figure()
   plt.imshow(image)
   plt.scatter(kp[0], kp[1], s=5, c='r')
-  plt.savefig('viz.png')
+  plt.savefig('vis.png')
 
 
-# from PIL import Image
-# from matplotlib import pyplot as plt
-
-# from src.facial_key_point.utils.inference_help import FacialKeyPointDetection
-
-# if __name__ == "__main__":
-#     image = Image.open('face.jpg').convert('RGB')
-#     facial_key_point_detection = FacialKeyPointDetection()
-#     image, kp = facial_key_point_detection.predict(image)
-
-#     plt.figure()
-#     plt.imshow(image)
-#     plt.scatter(kp[0], kp[1], s=4, c='r')
-#     plt.savefig('viz.png')

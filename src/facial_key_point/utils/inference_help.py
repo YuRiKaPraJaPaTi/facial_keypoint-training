@@ -60,18 +60,20 @@ class FacialKeyPointDetection:
     def predict(self, image):
         img, img_disp = self.preprocess(image)
         kps = self.model(img[None]).flatten().detach().cpu()
-        kp_x, kp_y = self.postprocess(img_disp, kps)
-        return img_disp, (kp_x, kp_y)
+        kp = self.postprocess(img_disp, kps)
+        return img_disp, kp
     
     def preprocess(self, img):
         img = img.resize((224, 224))
-        img = img_disp = np.asarray(img)/ 225
+        img = img_disp = np.asarray(img)/ 225.0
         img = torch.tensor(img).permute(2, 0, 1).float()
-        img = self.normalize(img).float()
+        img = self.normalize(img)
+        img = img.float()
         return img.to(self.device), img_disp
 
     def postprocess(self, img, kps):
         img = np.array(img)
         width, height, _ = img.shape
+        
         kp_x, kp_y = kps[:68] * width, kps[68:] * height
         return kp_x, kp_y

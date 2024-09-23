@@ -81,7 +81,7 @@ def load_image(img_path, model_input_size, device):
     original_size = img.size
 
     #preprocessing image 
-    img = img.resize(model_input_size, Image.Resampling.BILINEAR)
+    img = img.resize(model_input_size, model_input_size)
     img = img_disp = np.asarray(img) / 255.0
     img = torch.tensor(img).permute(2, 0, 1)     #transposing
     img = normalize(img).float()
