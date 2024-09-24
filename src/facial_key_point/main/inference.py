@@ -14,7 +14,7 @@ from src.facial_key_point.utils.inference_help import FacialKeyPointDetection
 
 if __name__=='__main__':
   #load and convert image
-  image=Image.open('face.jpg').convert('RGB')
+  image=Image.open('face3.jpg').convert('RGB')
 
   plt.figure(figsize=(10, 5))
   #plot original image
@@ -33,6 +33,6 @@ if __name__=='__main__':
   # plt.figure()
   plt.imshow(image)
   plt.scatter(kp[0], kp[1], s=5, c='r')
-  plt.savefig('vis.png')
+  plt.savefig('vis_face3.png')
 
 

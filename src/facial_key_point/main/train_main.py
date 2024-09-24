@@ -49,9 +49,12 @@ def main():
   model = get_model(device=device)
 
   criterion = nn.L1Loss()
+  # criterion = nn.L2Loss()
   optimizer= torch.optim.Adam(model.parameters(), lr=configuration.get('learning_rate'))
 
   train_loss, test_loss = train(configuration.get('n_epoch'), train_dataloader, test_dataloader, model, criterion, optimizer)
+
+  torch.save(model, model_path)
 
   plot_curve(train_loss, test_loss, train_curve_path)
   visualization('face.jpg', model, vis_result_path, configuration.get('model_input_size'), device)
@@ -59,7 +62,7 @@ def main():
   with open(hyperparameter_path,'w') as h_fp:
     json.dump(configuration, h_fp)
 
-  torch.save(model, model_path)
+  
 
 
 

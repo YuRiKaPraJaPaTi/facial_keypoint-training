@@ -50,7 +50,7 @@ from torchvision import transforms
 
 class FacialKeyPointDetection:
     def __init__(self) -> None:
-        self.model = torch.load('dump/version_2/model.pth')
+        self.model = torch.load('dump/version_1/model.pth')
         self.normalize = transforms.Normalize(
             mean=[0.485, 0.456, 0.406],
             std=[0.229, 0.224, 0.225]
